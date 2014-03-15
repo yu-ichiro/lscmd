@@ -1,0 +1,24 @@
+#! /bin/bash
+
+## make an array of all the included paths
+## 1. pass the $PATH to tr
+## 2. replace the colon with space
+## 3. make it into a array with ("...")
+
+PARRAY=("`echo $PATH|tr -s ":" " "`")
+
+## make an temporary file that stores the command list
+TMP="/tmp/lscmd.tmp"
+touch $TMP
+
+## get the list of the commands in each included path  
+for var in $PARRAY;do
+## add the list to the tmp file
+ls -1 $var >> $TMP
+done
+
+## sort the list of commands
+sort < $TMP
+
+## dump the tmp file
+rm $TMP
