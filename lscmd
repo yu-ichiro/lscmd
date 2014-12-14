@@ -13,6 +13,8 @@ touch $TMP
 
 ## get the list of the commands in each included path  
 for var in $PARRAY;do
+## if the PATH exists..
+[ ! -d $var ] && continue
 ## add the list to the tmp file
 ls -1 $var >> $TMP
 done
